@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2024_10_08_072248) do
+ActiveRecord::Schema.define(version: 2024_10_08_084614) do
 
   create_table "categories", force: :cascade do |t|
     t.string "name"
@@ -23,20 +23,22 @@ ActiveRecord::Schema.define(version: 2024_10_08_072248) do
     t.string "content"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["question_id"], name: "index_choices_on_question_id"
   end
 
   create_table "questions", force: :cascade do |t|
     t.integer "category_id"
     t.string "content"
-    t.string "correct_answer"
-    t.string "difficulty"
+    t.integer "difficulty"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "correct_choice_id"
+    t.index ["correct_choice_id"], name: "index_questions_on_correct_choice_id"
   end
 
   create_table "quiz_sessions", force: :cascade do |t|
     t.integer "user_id"
-    t.string "score"
+    t.integer "score"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -54,4 +56,5 @@ ActiveRecord::Schema.define(version: 2024_10_08_072248) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "questions", "choices", column: "correct_choice_id"
 end

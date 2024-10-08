@@ -1,2 +1,17 @@
-<h1>Questions#show</h1>
-<p>Find me in app/views/questions/show.html.erb</p>
+<h1>クイズ</h1>
+
+<div>
+  <p><%= @question.content %></p>
+
+  <%= form_with url: question_path(@question), method: :patch do %>
+    <% @choices.each do |choice| %>
+      <div>
+        <%= radio_button_tag :choice_id, choice.id %>
+        <%= label_tag "choice_#{choice.id}", choice.content %>
+      </div>
+    <% end %>
+
+    <%= submit_tag "回答" %>
+  <% end %>
+</div>
+
