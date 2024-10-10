@@ -1,2 +1,14 @@
-<h1>QuizSessions#result</h1>
-<p>Find me in app/views/quiz_sessions/result.html.erb</p>
+<div style= "margin:20px;"> 
+
+  <h1>クイズ結果</h1>
+  
+  <div style= "margin:50px;">
+    <h3>正解数: <%= @correct_answers_count %> / 5</h3>
+  </div>
+  
+  <div style= "margin:30px; display: flex;">
+    <div style= "margin-right:30px;"><%= link_to "もう一度挑戦", questions_path , class: "btn btn-success" %></div>
+    <div><%= link_to "TOPへ戻る", root_path , class: "btn btn-secondary" %></div>
+  </div>
+  
+</div>

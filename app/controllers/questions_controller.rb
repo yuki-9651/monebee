@@ -1,37 +1,52 @@
 class QuestionsController < ApplicationController
-  def index
-    @questions = Question.order("RANDOM()").limit(5)  # ランダムで5問取得
-  end
+  before_action :set_questions, only: [:index, :show, :update]  # ここで確実にshowアクションの前に呼び出されるようにする
 
-  def answer
+  def index
+    session[:current_question_index] = 0   # 最初の質問から開始
+    session[:correct_answers_count] = 0    # 正解数をリセット
+    redirect_to question_path(@questions.first)  # 最初の質問へリダイレクト
   end
 
   def show
-    @question = Question.find(params[:id])  # URLパラメータから質問IDを取得して表示
-    @choices = @question.choices            # 質問に紐付いた選択肢を取得
+    if session[:current_question_index].nil?
+      redirect_to questions_path and return
+    end
+
+    @question = @questions[session[:current_question_index]]  # 現在の質問を表示
+    @choices = @question.choices  # 質問に紐付いた選択肢を取得
   end
   
   def update
-    # 回答処理をここで行う（例: セッションにスコアを保存）
-    question = Question.find(params[:id])
+    @question = @questions[session[:current_question_index]]
+
+    if params[:choice_id].blank?
+      flash[:alert] = "選択肢が選ばれていません"
+      redirect_to question_path(@question) and return
+    end
+  
     selected_choice = Choice.find(params[:choice_id])
 
-    if selected_choice == question.correct_choice
+    if selected_choice == @question.correct_choice
+      session[:correct_answers_count] += 1
       flash[:notice] = "正解！"
-      # 正解の場合の処理
     else
       flash[:alert] = "不正解！"
-      # 不正解の場合の処理
     end
 
-    # 次の質問へリダイレクト（ここでは次のIDの質問へ）
-    next_question = Question.order("RANDOM()").first
-    if next_question
-      redirect_to question_path(next_question)
+    session[:current_question_index] += 1
+    if session[:current_question_index] < @questions.size
+      redirect_to question_path(@questions[session[:current_question_index]])
     else
       redirect_to quiz_sessions_result_path  # 全ての質問が終了したら結果画面へ
     end
   end
-  
-  
+
+  private
+
+  def set_questions
+    session[:questions] ||= Question.order("RANDOM()").limit(5).pluck(:id)  # セッションに保持された質問リストを取得、または新たにセット
+    @questions = Question.find(session[:questions])
+  end
 end
+
+

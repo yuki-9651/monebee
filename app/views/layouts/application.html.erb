@@ -3,11 +3,13 @@
   <head>
     <title>Monebee</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
-    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+    
   </head>
 
   <body>
@@ -23,6 +25,14 @@
         <li>
           <%= link_to "ログイン", new_user_session_path %>
         </li>
+      <% end %>
+      <% flash.each do |message_type, message| %>
+        <div class="flash-message <%= message_type %>" 
+             style="border-radius: 5px; padding: 16px 24px; margin: 30px 50px 30px 50px;
+             <%= 'background-color: #bcdfff; color: #0067C0; border: solid 1px #0067C0;' if message_type == 'notice' %>
+             <%= 'background-color: #FF97C2; color: #930403; border: solid 1px #930403;' if message_type == 'alert' %>">
+          <%= message %>
+        </div>
       <% end %>
     </header>
     <%= yield %>

@@ -1,17 +1,21 @@
-<h1>クイズ</h1>
-
-<div>
-  <p><%= @question.content %></p>
-
-  <%= form_with url: question_path(@question), method: :patch do %>
-    <% @choices.each do |choice| %>
-      <div>
-        <%= radio_button_tag :choice_id, choice.id %>
-        <%= label_tag "choice_#{choice.id}", choice.content %>
+<div style= "margin:30px;"> 
+    <h1>問題</h1>
+    
+    <div style= "margin:30px;">
+      <div style= "margin-bottom:30px;">
+        <b><%= @question.content %></b>
       </div>
-    <% end %>
-
-    <%= submit_tag "回答" %>
-  <% end %>
+        <%= form_with url: question_path(@question), method: :patch do %>
+          <% @choices.each do |choice| %>
+            <div>
+              <%= radio_button_tag :choice_id, choice.id %>
+              <%= label_tag "choice_#{choice.id}", choice.content %>
+            </div>
+          <% end %>
+           <div style= "margin-top:20px; ">
+            <%= submit_tag "回答", class: "btn btn btn-success" %>
+           </div>
+        <% end %>
+    </div>
+    
 </div>
-
