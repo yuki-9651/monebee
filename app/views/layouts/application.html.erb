@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <meta charset="utf-8">
     <title>Monebee</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
@@ -8,32 +9,37 @@
     <%= csp_meta_tag %>
 
     <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_pack_tag 'application' %>
     
   </head>
 
-  <body>
-    <header>
-      <% if user_signed_in? %>
-        <li>
-          <%= link_to "ログアウト", destroy_user_session_path, method: :delete %>
-        </li>
-      <% else %>
-        <li>
-          <%= link_to "新規登録", new_user_registration_path %>
-        </li>
-        <li>
-          <%= link_to "ログイン", new_user_session_path %>
-        </li>
-      <% end %>
-      <% flash.each do |message_type, message| %>
-        <div class="flash-message <%= message_type %>" 
-             style="border-radius: 5px; padding: 16px 24px; margin: 30px 50px 30px 50px;
-             <%= 'background-color: #bcdfff; color: #0067C0; border: solid 1px #0067C0;' if message_type == 'notice' %>
-             <%= 'background-color: #FF97C2; color: #930403; border: solid 1px #930403;' if message_type == 'alert' %>">
-          <%= message %>
+  <body class="d-flex flex-column vh-100">
+    <header class="shadow-sm">
+      <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand p-2" href="/homes/top" >
+          <h2 style="font-family: 'Georgia', serif; font-size: 30px; color: white; margin: 0; ">Monebee</h2>
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
+                aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavDropdown">
+          <ul class="navbar-nav ml-auto">
+          <% if user_signed_in? %>
+            <li>
+              <%= link_to "ログアウト", destroy_user_session_path, method: :delete, class: 'nav-link text-light'  %>
+            </li>
+          <% else %>
+            <li>
+              <%= link_to "新規登録", new_user_registration_path, class: 'nav-link text-light'  %>
+            </li>
+            <li>
+              <%= link_to "ログイン", new_user_session_path, class: 'nav-link text-light'  %>
+            </li>
+          <% end %>
+         </ul>
         </div>
-      <% end %>
+      </nav>
     </header>
     <%= yield %>
   </body>
