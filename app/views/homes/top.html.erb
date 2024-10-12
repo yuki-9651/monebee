@@ -1,16 +1,18 @@
-<div style=" display: flex;">   
-    <div class="col-lg-1" style="min-height: 100vh; background-color:#43FF6B;" >
+<div style="display: flex; height: 100vh;">   
+    <div class="col-lg-1" style="background-color:#43FF6B;">
     </div>    
     
-    <div class="col-lg-10" style = "margin:20px;">
+    <div class="col-lg-10" style="padding: 20px; display: flex; flex-direction: column; justify-content: space-between;">
         <div>
-            <h1 class="text-center black-text"><%= link_to "クイズスタート！！", questions_path, class: "btn btn-lg btn-primary" %></h1>
-            <h3 class="text-center" style="margin:20px;">クイズに答えてマネーリテラシーをアップしよう！！</h3>
+            <h1 class="text-center black-text">
+              <%= link_to "クイズスタート", question_path(session[:questions][0]), class: "btn btn-lg btn-primary" %>
+            </h1>
+            <h3 class="text-center" style="margin: 20px 0;">クイズに答えてマネーリテラシーをアップしよう！！</h3>
         </div>
-        <div style="background-image:url(<%= asset_path '金融アイコン_お金とチャート.jpeg' %>); background-size: cover; background-repeat: no-repeat; background-position: center; height:70%;">
+        <div style="background-image:url(<%= asset_path '金融アイコン_お金とチャート.jpeg' %>); background-size: cover; background-repeat: no-repeat; background-position: center; flex-grow: 1;">
         </div>
     </div>
     
-    <div class="col-lg-1" style=" min-height: 100vh;  background-color:#43FF6B;" >
+    <div class="col-lg-1" style="background-color:#43FF6B;">
     </div>  
 </div>

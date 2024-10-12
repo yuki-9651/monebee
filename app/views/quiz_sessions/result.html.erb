@@ -1,21 +1,31 @@
-<div style= "margin:20px;"> 
-    <% flash.each do |message_type, message| %>
-    <div class="flash-message <%= message_type %>" 
-         style="border-radius: 5px; padding: 16px 24px; margin: 30px 50px 30px 50px;
-         <%= 'background-color: #bcdfff; color: #0067C0; border: solid 1px #0067C0;' if message_type == 'notice' %>
-         <%= 'background-color: #FF97C2; color: #930403; border: solid 1px #930403;' if message_type == 'alert' %>">
-      <%= message %>
+<div style="display: flex; height: 100vh;"> 
+
+    <div class="col-lg-1" style="background-color:#43FF6B;">
+    </div> 
+    
+    <div class="col-lg-10" style="padding:30px;">
+      
+      <% flash.each do |message_type, message| %>
+        <div class="flash-message <%= message_type %>" 
+             style="border-radius: 5px; padding: 16px 24px; margin: 30px 50px 30px 50px;
+             <%= 'background-color: #bcdfff; color: #0067C0; border: solid 1px #0067C0;' if message_type == 'notice' %>
+             <%= 'background-color: #FF97C2; color: #930403; border: solid 1px #930403;' if message_type == 'alert' %>">
+          <%= message %>
+        </div>
+      <% end %>
+      
+      <h1 class="text-center">クイズ結果</h1>
+      
+      <div class="text-center" style= "margin:50px;">
+        <h3>正解数: <%= @correct_answers_count %> / 5</h3>
+      </div>
+      
+      <div style= "margin:30px; display: flex; justify-content: center">
+        <div><%= link_to "TOPへ戻る", root_path , class: "btn btn-secondary" %></div>
+      </div>
+      
     </div>
-  <% end %>
-  <h1>クイズ結果</h1>
-  
-  <div style= "margin:50px;">
-    <h3>正解数: <%= @correct_answers_count %> / 5</h3>
-  </div>
-  
-  <div style= "margin:30px; display: flex;">
-    <div style= "margin-right:30px;"><%= link_to "もう一度挑戦", questions_path , class: "btn btn-success" %></div>
-    <div><%= link_to "TOPへ戻る", root_path , class: "btn btn-secondary" %></div>
-  </div>
-  
+    
+    <div class="col-lg-1" style="background-color:#43FF6B;">
+    </div> 
 </div>
