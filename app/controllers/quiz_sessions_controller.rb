@@ -1,5 +1,6 @@
 class QuizSessionsController < ApplicationController
   def result
-    @correct_answers_count = session[:correct_answers_count]
+    @quiz_session = QuizSession.find(params[:quiz_session_id])
+    @score = @quiz_session.score
   end
 end

@@ -1,44 +1,31 @@
 class QuestionsController < ApplicationController
   
-  before_action :set_questions, only: [:index, :show, :update]
-
   def show
-    @question = Question.find(session[:questions])
-    @choices = @question.choices
+    @q_num = params[:id].to_i
+
+    # ランダムな質問を取得
+    @q = Question.order('RANDOM()').first
+    @choices = @q.choices
   end
-  
+
   def update
-    @question = @questions[session[:current_question_index]]
-    if params[:choice_id].blank?
-      flash[:alert] = "選択肢が選ばれていません"
-      redirect_to question_path(@question) and return
-    end
+    q_num = params[:q_num].to_i
     
     selected_choice = Choice.find(params[:choice_id])
-
-    if selected_choice == @question.correct_choice
-      session[:correct_answers_count] += 1
+    correct = (selected_choice.id == Question.find(params[:q_id]).correct_choice.id)
+    if correct
+      
       flash[:notice] = "正解！"
     else
       flash[:alert] = "不正解！"
     end
-    
-    session[:current_question_index] += 1
-    if session[:current_question_index] < session[:questions].length
-      redirect_to question_path(session[:questions][session[:current_question_index]])
+
+    # 次の問題または結果ページにリダイレクト
+    if q_num >= 5
+      redirect_to quiz_sessions_result_path(quiz_session_id: quiz_session.id)
     else
-      redirect_to quiz_sessions_result_path
+      redirect_to question_path(q_num + 1, quiz_session_id: quiz_session.id)
     end
   end
 
-  private
-  
-  def set_questions
-    if session[:questions].nil?
-      session[:questions] = Question.order("RANDOM()").limit(5).pluck(:id)
-      session[:current_question_index] = 0
-      session[:correct_answers_count] = 0
-    end
-    @questions = Question.includes(:choices).find(session[:questions])
-  end
 end

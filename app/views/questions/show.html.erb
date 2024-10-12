@@ -14,9 +14,9 @@
       
       <div style= "padding:30px;">
         <div style= "padding-bottom:30px;">
-          <b><%= @question.content %></b>
+          <b><%= @q.content %></b>
         </div>
-          <%= form_with url: question_path(@question), method: :patch do %>
+          <%= form_with url: question_path(@q), method: :patch do %>
             <% @choices.each do |choice| %>
               <div>
                 <%= radio_button_tag :choice_id, choice.id %>
