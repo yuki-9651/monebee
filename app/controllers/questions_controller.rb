@@ -12,7 +12,21 @@ class QuestionsController < ApplicationController
     q_num = params[:q_num].to_i
     
     selected_choice = Choice.find(params[:choice_id])
-    correct = (selected_choice.id == Question.find(params[:q_id]).correct_choice.id)
+    correct = (selected_choice == Question.find(params[:q_id]).correct_choice)
+    
+    
+    current_question_id = session[:current_question_id]
+    @question = Question.find(current_question_id)
+    selected_choice = Choice.find(params[:choice_id])
+
+    if selected_choice == @question.correct_choice
+      session[:correct_answers_count] += 1
+      flash[:notice] = "正解！"
+    else
+      flash[:alert] = "不正解！"
+    end
+    
+    
     if correct
       
       flash[:notice] = "正解！"
