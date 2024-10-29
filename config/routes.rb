@@ -1,10 +1,13 @@
 Rails.application.routes.draw do
-
+  
   devise_for :users
   root to: 'homes#top'
-  
-  get 'quiz_sessions/result'
+
+  get 'quiz_sessions/result', to: 'quiz_sessions#result', as: :quiz_sessions_result
+  post 'quiz_sessions/start', to: 'quiz_sessions#start', as: :start_quiz_sessions
   get 'homes/top'
-  resources :questions, only: [:index, :answer, :show, :update]
+
+  resources :questions, only: [:index, :show, :update]
   
 end
+
