@@ -1,7 +1,7 @@
 class QuestionsController < ApplicationController
   
   def show
-    @q_num = params[:id].to_i
+    session[:current_question_id] = params[:id].to_i
 
     # ランダムな質問を取得
     @q = Question.order('RANDOM()').first
@@ -9,17 +9,11 @@ class QuestionsController < ApplicationController
   end
 
   def update
-    q_num = params[:q_num].to_i
     
     selected_choice = Choice.find(params[:choice_id])
-    correct = (selected_choice == Question.find(params[:q_id]).correct_choice)
-    
-    
     current_question_id = session[:current_question_id]
-    @question = Question.find(current_question_id)
-    selected_choice = Choice.find(params[:choice_id])
-
-    if selected_choice == @question.correct_choice
+    
+    if selected_choice == current_question_id.choice_id
       session[:correct_answers_count] += 1
       flash[:notice] = "正解！"
     else
