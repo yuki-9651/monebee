@@ -7,7 +7,7 @@
                style="border-radius: 5px; padding: 16px 24px; margin: 30px 50px 30px 50px;
                <%= 'background-color: #bcdfff; color: #0067C0; border: solid 1px #0067C0;' if message_type == 'notice' %>
                <%= 'background-color: #FF97C2; color: #930403; border: solid 1px #930403;' if message_type == 'alert' %>">
-            <%= message %>
+            <%= message %><button type="button" class="close" data-dismiss="alert">&times;</button>
           </div>
         <% end %>
       <h1>問題</h1>
