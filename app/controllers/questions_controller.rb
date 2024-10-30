@@ -47,13 +47,9 @@ class QuestionsController < ApplicationController
 
   private
 
+
   def set_quiz_session
-    
-    @quiz_session = QuizSession.find_by(id: session[:quiz_session_id])
-    
-    unless @quiz_session
-      redirect_to start_quiz_sessions_path, alert: "クイズセッションが開始されていません。"
-    end
-    
+    @quiz_session = QuizSession.find(session[:quiz_session_id])
   end
+
 end
