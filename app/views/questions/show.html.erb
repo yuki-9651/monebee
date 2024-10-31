@@ -1,34 +1,47 @@
 <div style="display: flex; height: 100vh;"> 
+
     <div class="col-lg-1" style="background-color:#43FF6B;">
     </div> 
+    
     <div class="col-lg-10" style="padding:30px;">
+      
+      <div style="height:25%;">
         <% flash.each do |message_type, message| %>
           <div class="flash-message <%= message_type %>" 
-               style="border-radius: 5px; padding: 16px 24px; margin: 30px 50px 30px 50px;
+               style="border-radius: 5px; padding: 16px 24px; margin: 9px 15px 9px 15px;
                <%= 'background-color: #bcdfff; color: #0067C0; border: solid 1px #0067C0;' if message_type == 'notice' %>
                <%= 'background-color: #FF97C2; color: #930403; border: solid 1px #930403;' if message_type == 'alert' %>">
-            <%= message %><button type="button" class="close" data-dismiss="alert">&times;</button>
+            <%= message %>
+            <button type="button" class="close" onclick="this.parentElement.style.display='none';">&times;</button>
           </div>
         <% end %>
-      <h1>問題</h1>
-      
-      <div style= "padding:30px;">
-        <div style= "padding-bottom:30px;">
-          <b><%= @q.content %></b>
-        </div>
-          <%= form_with url: question_path(@q), method: :patch do %>
-            <% @choices.each do |choice| %>
-              <div>
-                <%= radio_button_tag :choice_id, choice.id %>
-                <%= label_tag "choice_#{choice.id}", choice.content %>
-              </div>
-            <% end %>
-             <div style= "padding-top:20px; ">
-              <%= submit_tag "回答", class: "btn btn btn-success" %>
-             </div>
-          <% end %>
       </div>
+      
+      <div style="height:75%; padding-left:10%;">
+          <h1>問題</h1>
+          
+          <div style= "padding:30px;">
+            
+            <div style= "padding-bottom:30px;">
+              <b><%= @q.content %></b>
+            </div>
+              <%= form_with url: question_path(@q), method: :patch do %>
+                <% @choices.each do |choice| %>
+                  <div>
+                    <%= radio_button_tag :choice_id, choice.id %>
+                    <%= label_tag "choice_#{choice.id}", choice.content %>
+                  </div>
+                <% end %>
+                 <div style= "padding-top:20px; ">
+                  <%= submit_tag "回答", class: "btn btn btn-success" %>
+                 </div>
+              <% end %>
+          </div>
+          
+      </div>
+      
     </div>
+    
     <div class="col-lg-1" style="background-color:#43FF6B;">
     </div> 
 </div>

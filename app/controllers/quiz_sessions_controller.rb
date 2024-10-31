@@ -18,6 +18,10 @@ class QuizSessionsController < ApplicationController
     
     @quiz_session = QuizSession.find(session[:quiz_session_id])
     @score = @quiz_session.score
+    
+    question_ids = session[:question_ids][0..4]
+    @answer_quizzes = Question.where(id: question_ids)
+    
   end
   
 end

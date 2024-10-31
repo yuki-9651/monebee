@@ -7,7 +7,7 @@ class QuestionsController < ApplicationController
       redirect_to start_quiz_sessions_path, alert: "クイズセッションが開始されていません。"
       return
     end
-
+    
     session[:question_ids] ||= Question.pluck(:id).shuffle
     session[:current_question_index] ||= 0
 

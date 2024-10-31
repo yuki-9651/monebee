@@ -16,13 +16,32 @@
       
       <h1 class="text-center">クイズ結果</h1>
       
-      <div class="text-center" style= "margin:50px;">
+      <div class="text-center" style= "margin:30px;">
         <h3>正解数: <%= @score %> / 5</h3>
       </div>
       
-      <div style= "margin:30px; display: flex; justify-content: center">
+      <div style= "margin:20px; display: flex; justify-content: center">
         <div><%= link_to "TOPへ戻る", root_path , class: "btn btn-secondary" %></div>
       </div>
+      
+      <div style="padding-left:20%;">
+        
+        <% @answer_quizzes.each do |answer_quiz| %>
+          <div style="margin:20px;">
+            <a style="color:blue;">問題文：<%= answer_quiz.content %></a>　難易度：レベル<a style="color:red;"><b><%= answer_quiz.difficulty %></b></a></br>
+            <p style="padding-top:10px;"><b>答え：<%= answer_quiz.correct_choice.content %></b></p>
+          </div>
+        <% end %>
+        
+        
+      </div>
+      
+      
+      
+      
+      
+      
+      
       
     </div>
     
