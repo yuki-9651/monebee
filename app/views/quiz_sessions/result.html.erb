@@ -28,7 +28,7 @@
         
         <% @answer_quizzes.each do |answer_quiz| %>
           <div style="margin:20px;">
-            <a style="color:blue;">問題文：<%= answer_quiz.content %></a>　難易度：レベル<a style="color:red;"><b><%= answer_quiz.difficulty %></b></a></br>
+            <a style="color:blue;">問題：<%= answer_quiz.content %></a>　難易度：レベル<a style="color:red;"><b><%= answer_quiz.difficulty %></b></a></br>
             <p style="padding-top:10px;"><b>答え：<%= answer_quiz.correct_choice.content %></b></p>
           </div>
         <% end %>

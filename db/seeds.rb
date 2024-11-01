@@ -52,18 +52,18 @@ question44 = Question.find_or_create_by(content: " 住宅ローンの「繰り�
 question45 = Question.find_or_create_by(content: " 借金の返済が困難な場合、最初に取るべき行動は？", category: category3, difficulty:3)
 
 # 質問1の選択肢を作成
-choice1_1 = Choice.find_or_create_by(content: "投資元本にのみ利息が付くこと", question: question1)
-choice1_2 = Choice.find_or_create_by(content: "元本と利息に利息が付くこと", question: question1)
-choice1_3 = Choice.find_or_create_by(content: "利率が一定の投資商品", question: question1)
-choice1_4 = Choice.find_or_create_by(content: "利息が最初の1回だけ発生すること", question: question1)
+choice1_1 = Choice.find_or_create_by(content: "A. 投資元本にのみ利息が付くこと", question: question1)
+choice1_2 = Choice.find_or_create_by(content: "B. 元本と利息に利息が付くこと", question: question1)
+choice1_3 = Choice.find_or_create_by(content: "C. 利率が一定の投資商品", question: question1)
+choice1_4 = Choice.find_or_create_by(content: "D. 利息が最初の1回だけ発生すること", question: question1)
 question1.update(correct_choice: choice1_2)  # 正解を設定
 
 
 # 質問2の選択肢を作成
-choice2_1 = Choice.find_or_create_by(content: "信用リスク", question: question2)
-choice2_2 = Choice.find_or_create_by(content: "流動性リスク", question: question2)
-choice2_3 = Choice.find_or_create_by(content: "価格変動リスク", question: question2)
-choice2_4 = Choice.find_or_create_by(content: "すべて", question: question2)
+choice2_1 = Choice.find_or_create_by(content: "A. 信用リスク", question: question2)
+choice2_2 = Choice.find_or_create_by(content: "B. 流動性リスク", question: question2)
+choice2_3 = Choice.find_or_create_by(content: "C. 価格変動リスク", question: question2)
+choice2_4 = Choice.find_or_create_by(content: "D. すべて", question: question2)
 question2.update(correct_choice: choice2_3)  # 正解を設定
 
 choice3_1 = Choice.find_or_create_by(content: "A. 市場価格に関係なく定額を投資することで、長期的に購入単価を下げる", question: question3)
