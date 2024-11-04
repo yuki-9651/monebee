@@ -1,5 +1,14 @@
+<div style="background-color: #43FF6B;">
+  <% flash.each do |message_type, message| %>
+    <div class="flash-message <%= message_type %>" 
+         style="border-radius: 5px; padding: 16px 24px; margin: 30px 50px 30px 50px;
+         <%= 'background-color: #bcdfff; color: #0067C0; border: solid 1px #0067C0;' if message_type == 'notice' %>
+         <%= 'background-color: #FF97C2; color: #930403; border: solid 1px #930403;' if message_type == 'alert' %>">
+      <%= message %><button type="button" class="close" onclick="this.parentElement.style.display='none';">&times;</button>
+    </div>
+  <% end %>
+</div>
 <div style="display: flex; height: 100%; background-color: #43FF6B; padding: 30px;">
-
      <div style="flex: 1;">
        <h2>ログイン</h2>
      </div>
