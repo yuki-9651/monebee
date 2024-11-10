@@ -40,13 +40,13 @@ pidfile ENV.fetch("PIDFILE") { "tmp/pids/server.pid" }
 # preload_app!
 
 # Allow puma to be restarted by `rails restart` command.
-plugin :tmp_restart
+bind "unix://#{File.expand_path('tmp/sockets/puma.sock', __dir__)}"
 
-
-bind "unix://#{Rails.root}/tmp/sockets/puma.sock"
-rails_root = Dir.pwd
-# 本番環境のみデーモン起動
-if Rails.env.production?
+# デーモンモードやログの設定（Rails環境変数を直接参照しない方法）
+rails_env = ENV.fetch("RAILS_ENV") { "development" }
+if rails_env == "production"
+  rails_root = File.expand_path("../..", __FILE__)
+  
   pidfile File.join(rails_root, 'tmp', 'pids', 'puma.pid')
   state_path File.join(rails_root, 'tmp', 'pids', 'puma.state')
   stdout_redirect(
@@ -54,6 +54,9 @@ if Rails.env.production?
     File.join(rails_root, 'log', 'puma-error.log'),
     true
   )
-  # デーモン
-  daemonize
+
+  # デーモンモードを有効化
+  daemonize true
 end
+
+plugin :tmp_restart
