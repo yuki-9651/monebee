@@ -12,7 +12,7 @@ en:
       invalid: "Invalid %{authentication_keys} or password."
       locked: "Your account is locked."
       last_attempt: "You have one more attempt before your account is locked."
-      not_found_in_database: "%{authentication_keys} またはパスワードが無効です。"
+      not_found_in_database: "%{authentication_keys}またはパスワードが無効です。"
       timeout: "Your session expired. Please sign in again to continue."
       unauthenticated: "続行する前にログインまたは新規登録する必要があります。"
       unconfirmed: "You have to confirm your email address before continuing."
