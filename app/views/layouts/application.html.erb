@@ -25,6 +25,7 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarNavDropdown">
           <ul class="navbar-nav ml-auto">
+          <%# 本番環境でログイン・退会がRouting Errorになってしまう%>
           <% if user_signed_in? %>
             <li>
               <%= link_to '退会', user_registration_path, method: :delete, data: { confirm: "本当に退会してもよろしいですか？" }, class: 'nav-link text-light' %>
